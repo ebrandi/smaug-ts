@@ -1,0 +1,10 @@
+dist/
+node_modules/
+coverage/
+public/
+legacy/
+prisma/migrations/
+*.md
+*.json
+*.yaml
+*.yml

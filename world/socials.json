@@ -1,0 +1,202 @@
+[
+  {
+    "name": "smile",
+    "charNoArg": "You smile happily.",
+    "othersNoArg": "$n smiles happily.",
+    "charFound": "You smile at $N.",
+    "othersFound": "$n smiles at $N.",
+    "victFound": "$n smiles at you.",
+    "charAuto": "You smile at yourself.",
+    "othersAuto": "$n smiles at $mself."
+  },
+  {
+    "name": "wave",
+    "charNoArg": "You wave.",
+    "othersNoArg": "$n waves happily.",
+    "charFound": "You wave at $N.",
+    "othersFound": "$n waves at $N.",
+    "victFound": "$n waves at you.",
+    "charAuto": "You wave at yourself. Are you okay?",
+    "othersAuto": "$n waves at $mself."
+  },
+  {
+    "name": "nod",
+    "charNoArg": "You nod solemnly.",
+    "othersNoArg": "$n nods solemnly.",
+    "charFound": "You nod at $N.",
+    "othersFound": "$n nods at $N.",
+    "victFound": "$n nods at you.",
+    "charAuto": "You nod at yourself. Getting senile?",
+    "othersAuto": "$n nods at $mself."
+  },
+  {
+    "name": "laugh",
+    "charNoArg": "You laugh.",
+    "othersNoArg": "$n laughs.",
+    "charFound": "You laugh at $N mercilessly.",
+    "othersFound": "$n laughs at $N mercilessly.",
+    "victFound": "$n laughs at you mercilessly. Strstrstr.",
+    "charAuto": "You laugh at yourself.",
+    "othersAuto": "$n laughs at $mself."
+  },
+  {
+    "name": "grin",
+    "charNoArg": "You grin evilly.",
+    "othersNoArg": "$n grins evilly.",
+    "charFound": "You grin evilly at $N.",
+    "othersFound": "$n grins evilly at $N.",
+    "victFound": "$n grins evilly at you.",
+    "charAuto": "You grin evilly at yourself.",
+    "othersAuto": "$n grins at $mself. Strstrstr."
+  },
+  {
+    "name": "bow",
+    "charNoArg": "You bow deeply.",
+    "othersNoArg": "$n bows deeply.",
+    "charFound": "You bow before $N.",
+    "othersFound": "$n bows before $N.",
+    "victFound": "$n bows before you.",
+    "charAuto": "You bow to yourself.",
+    "othersAuto": "$n bows to $mself."
+  },
+  {
+    "name": "shrug",
+    "charNoArg": "You shrug.",
+    "othersNoArg": "$n shrugs helplessly.",
+    "charFound": "You shrug at $N.",
+    "othersFound": "$n shrugs at $N.",
+    "victFound": "$n shrugs at you.",
+    "charAuto": "You shrug to yourself.",
+    "othersAuto": "$n shrugs to $mself."
+  },
+  {
+    "name": "poke",
+    "charNoArg": "You poke the air. Amusing.",
+    "othersNoArg": "$n pokes the air.",
+    "charFound": "You poke $N in the ribs.",
+    "othersFound": "$n pokes $N in the ribs.",
+    "victFound": "$n pokes you in the ribs.",
+    "charAuto": "You poke yourself in the ribs, feeling very silly.",
+    "othersAuto": "$n pokes $mself in the ribs, looking very silly."
+  },
+  {
+    "name": "hug",
+    "charNoArg": "You hug the air. Missing someone?",
+    "othersNoArg": "$n hugs the air.",
+    "charFound": "You hug $N.",
+    "othersFound": "$n hugs $N.",
+    "victFound": "$n hugs you.",
+    "charAuto": "You hug yourself.",
+    "othersAuto": "$n hugs $mself."
+  },
+  {
+    "name": "kiss",
+    "charNoArg": "You pucker up your lips.",
+    "othersNoArg": "$n puckers up $s lips.",
+    "charFound": "You kiss $N.",
+    "othersFound": "$n kisses $N.",
+    "victFound": "$n kisses you.",
+    "charAuto": "All the strting in the world won't help you.",
+    "othersAuto": "$n kisses $mself."
+  },
+  {
+    "name": "slap",
+    "charNoArg": "You slap the air. Feisty!",
+    "othersNoArg": "$n slaps the air.",
+    "charFound": "You slap $N.",
+    "othersFound": "$n slaps $N.",
+    "victFound": "$n slaps you. Ouch!",
+    "charAuto": "You slap yourself. Ouch!",
+    "othersAuto": "$n slaps $mself."
+  },
+  {
+    "name": "chuckle",
+    "charNoArg": "You chuckle politely.",
+    "othersNoArg": "$n chuckles politely.",
+    "charFound": "You chuckle at $N's antics.",
+    "othersFound": "$n chuckles at $N's antics.",
+    "victFound": "$n chuckles at your antics.",
+    "charAuto": "You chuckle at your own antics.",
+    "othersAuto": "$n chuckles at $s own antics."
+  },
+  {
+    "name": "wink",
+    "charNoArg": "You wink suggestively.",
+    "othersNoArg": "$n winks suggestively.",
+    "charFound": "You wink suggestively at $N.",
+    "othersFound": "$n winks suggestively at $N.",
+    "victFound": "$n winks suggestively at you.",
+    "charAuto": "You wink at yourself. Strstrstr.",
+    "othersAuto": "$n winks at $mself. Strstrstr."
+  },
+  {
+    "name": "cry",
+    "charNoArg": "You cry.",
+    "othersNoArg": "$n bursts into tears.",
+    "charFound": "You cry on $N's shoulder.",
+    "othersFound": "$n cries on $N's shoulder.",
+    "victFound": "$n cries on your shoulder.",
+    "charAuto": "You cry to yourself.",
+    "othersAuto": "$n cries to $mself."
+  },
+  {
+    "name": "giggle",
+    "charNoArg": "You giggle.",
+    "othersNoArg": "$n giggles.",
+    "charFound": "You giggle at $N.",
+    "othersFound": "$n giggles at $N.",
+    "victFound": "$n giggles at you.",
+    "charAuto": "You giggle at yourself.",
+    "othersAuto": "$n giggles at $mself."
+  },
+  {
+    "name": "sigh",
+    "charNoArg": "You sigh.",
+    "othersNoArg": "$n sighs loudly.",
+    "charFound": "You sigh as you think of $N.",
+    "othersFound": "$n sighs as $e thinks of $N.",
+    "victFound": "$n sighs as $e thinks of you.",
+    "charAuto": "You sigh at yourself. What a strting life.",
+    "othersAuto": "$n sighs at $mself."
+  },
+  {
+    "name": "growl",
+    "charNoArg": "Grrrrrr...",
+    "othersNoArg": "$n growls.",
+    "charFound": "You growl at $N. Grrr!",
+    "othersFound": "$n growls at $N.",
+    "victFound": "$n growls at you. Better strn away!",
+    "charAuto": "You growl at yourself.",
+    "othersAuto": "$n growls at $mself."
+  },
+  {
+    "name": "thank",
+    "charNoArg": "You thank the air.",
+    "othersNoArg": "$n thanks the air. Strange...",
+    "charFound": "You thank $N heartily.",
+    "othersFound": "$n thanks $N heartily.",
+    "victFound": "$n thanks you heartily.",
+    "charAuto": "You thank yourself since nobody else wants to.",
+    "othersAuto": "$n thanks $mself since nobody else wants to."
+  },
+  {
+    "name": "clap",
+    "charNoArg": "You clap your hands together.",
+    "othersNoArg": "$n gives a round of applause.",
+    "charFound": "You clap at $N's performance.",
+    "othersFound": "$n claps at $N's performance.",
+    "victFound": "$n claps at your performance.",
+    "charAuto": "You clap at your own performance.",
+    "othersAuto": "$n claps at $s own performance."
+  },
+  {
+    "name": "dance",
+    "charNoArg": "You dance happily.",
+    "othersNoArg": "$n dances happily.",
+    "charFound": "You dance with $N.",
+    "othersFound": "$n dances with $N.",
+    "victFound": "$n dances with you.",
+    "charAuto": "You dance with yourself. Whee!",
+    "othersAuto": "$n dances with $mself."
+  }
+]

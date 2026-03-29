@@ -1,0 +1,24 @@
+[
+  {
+    "command": "M",
+    "extra": 0,
+    "arg1": 100,
+    "arg2": 1,
+    "arg3": 100,
+    "arg4": 0,
+    "arg5": 0,
+    "arg6": 0,
+    "arg7": 0
+  },
+  {
+    "command": "E",
+    "extra": 0,
+    "arg1": 100,
+    "arg2": 1,
+    "arg3": 16,
+    "arg4": 0,
+    "arg5": 0,
+    "arg6": 0,
+    "arg7": 0
+  }
+]

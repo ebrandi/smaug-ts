@@ -1,0 +1,13 @@
+{
+  "name": "Example Area",
+  "filename": "_example",
+  "author": "System",
+  "vnumRanges": {
+    "rooms": { "low": 100, "high": 109 },
+    "mobiles": { "low": 100, "high": 109 },
+    "objects": { "low": 100, "high": 109 }
+  },
+  "resetFrequency": 15,
+  "resetMessage": "The area shimmers and resets.",
+  "flags": 0
+}

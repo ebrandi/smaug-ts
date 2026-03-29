@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables (may contain secrets)
+.env
+.env.local
+.env.*.local
+
+# Database files
+*.sqlite
+*.db
+*.sqlite3
+prisma/*.db*
+!.prisma/schema.prisma
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Browser client builds (typically not committed)
+public/dist/
+public/js/bundle.*
+
+# Generated files
+ prisma/generate/
+src/dashboard/node_modules/
+src/client/node_modules/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.old

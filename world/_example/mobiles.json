@@ -1,0 +1,27 @@
+[
+  {
+    "vnum": 100,
+    "name": "city guard",
+    "shortDescription": "A city guard",
+    "longDescription": "A burly city guard stands here, watching for troublemakers.",
+    "description": "This guard is clad in chain mail and carries a well-worn sword at his side. His vigilant eyes scan the area constantly.",
+    "keywords": "guard city",
+    "level": 10,
+    "sex": 1,
+    "race": 0,
+    "class": 3,
+    "alignment": 1000,
+    "actFlags": "1",
+    "affectedBy": "0",
+    "hitDice": { "numDice": 3, "sizeDice": 8, "bonus": 20 },
+    "damageDice": { "numDice": 2, "sizeDice": 6, "bonus": 2 },
+    "gold": 50,
+    "position": 8,
+    "defaultPosition": 8,
+    "savingPoison": 0,
+    "savingRod": 0,
+    "savingPara": 0,
+    "savingBreath": 0,
+    "savingSpell": 0
+  }
+]

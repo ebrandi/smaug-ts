@@ -1,0 +1,18 @@
+[
+  {
+    "vnum": 100,
+    "name": "short sword",
+    "shortDescription": "a short sword",
+    "description": "A short sword has been left here.",
+    "keywords": "sword short",
+    "itemType": 5,
+    "wearFlags": "8193",
+    "extraFlags": "0",
+    "values": [0, 1, 6, 3, 0, 0],
+    "weight": 5,
+    "cost": 100,
+    "extraDescriptions": [
+      { "keywords": "sword", "description": "A well-balanced short sword with a sharp steel blade and a leather-wrapped grip." }
+    ]
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "level": 0,
+    "keywords": "MOTD",
+    "text": "Welcome to SMAUG 2.0!\n\nThis is the Message of the Day.\nType 'help' for a list of topics."
+  },
+  {
+    "level": 0,
+    "keywords": "LOOK",
+    "text": "Syntax: look\n        look <object>\n        look <character>\n        look <direction>\n        look in <container>\n\nLOOK without arguments shows you the room you are in, including\nexits, objects on the ground, and other characters present.\n\nLOOK at an object or character shows you a description of that\nthing. LOOK in a container shows the contents.\n\nLOOK in a direction shows the exit description and door state."
+  },
+  {
+    "level": 0,
+    "keywords": "MOVEMENT NORTH SOUTH EAST WEST UP DOWN",
+    "text": "Syntax: north, south, east, west, up, down\n        n, s, e, w, u, d\n\nUse these commands to move in the indicated direction.\nMovement costs vary by terrain type. You must have enough\nmovement points to travel. Resting and sleeping restore\nmovement points over time."
+  },
+  {
+    "level": 0,
+    "keywords": "SCORE",
+    "text": "Syntax: score\n\nDisplays your full character sheet including:\n  - Name, level, race, class, sex\n  - HP, Mana, Movement points\n  - All stats (Str/Int/Wis/Dex/Con/Cha/Lck)\n  - Combat stats (hitroll, damroll, armor)\n  - Wealth, experience, alignment\n  - Active affects count"
+  },
+  {
+    "level": 0,
+    "keywords": "WHO",
+    "text": "Syntax: who\n        who -r <race>\n        who -c <class>\n        who -l <min level>\n        who -g <clan>\n        who -i\n\nDisplays a list of currently online players.\nUse filters to narrow down the list:\n  -r  Filter by race\n  -c  Filter by class\n  -l  Filter by minimum level\n  -g  Filter by clan\n  -i  Show only immortals"
+  },
+  {
+    "level": 0,
+    "keywords": "WHERE",
+    "text": "Syntax: where\n        where <name>\n\nWithout arguments, shows all visible players in your area.\nWith a name, searches for that player or mob in the area."
+  },
+  {
+    "level": 0,
+    "keywords": "EXAMINE",
+    "text": "Syntax: examine <object>\n\nEXAMINE shows you a detailed view of an object, including\nweapon damage, armor class, container capacity, and other\nitem-specific information."
+  },
+  {
+    "level": 0,
+    "keywords": "INVENTORY",
+    "text": "Syntax: inventory\n\nShows a list of all items you are carrying.\nIdentical items are grouped with a count."
+  },
+  {
+    "level": 0,
+    "keywords": "EQUIPMENT",
+    "text": "Syntax: equipment\n\nShows all items you are currently wearing or wielding,\norganized by wear location."
+  },
+  {
+    "level": 0,
+    "keywords": "AFFECTS",
+    "text": "Syntax: affects\n\nShows all magical affects currently active on your character,\nincluding the spell name, modifier, and remaining duration."
+  },
+  {
+    "level": 0,
+    "keywords": "CONSIDER",
+    "text": "Syntax: consider <target>\n\nCompares your level and hit points to a target mob,\ngiving you an idea of how difficult the fight would be."
+  },
+  {
+    "level": 0,
+    "keywords": "OPEN CLOSE LOCK UNLOCK PICK DOORS",
+    "text": "Syntax: open <direction|door|container>\n        close <direction|door|container>\n        lock <direction|door>\n        unlock <direction|door>\n        pick <direction|door>\n\nDoor manipulation commands. LOCK and UNLOCK require the\nappropriate key. PICK attempts to unlock without a key\nbut may fail depending on skill and door difficulty."
+  },
+  {
+    "level": 0,
+    "keywords": "FLEE",
+    "text": "Syntax: flee\n\nAttempts to escape from combat by running to a random\nadjacent room. On success, you lose some experience points.\nYou must be fighting to use this command."
+  },
+  {
+    "level": 0,
+    "keywords": "RECALL",
+    "text": "Syntax: recall\n\nTeleports you to your recall point (usually the temple).\nCosts half of your current movement points.\nCannot be used in no-recall rooms."
+  },
+  {
+    "level": 0,
+    "keywords": "ENTER LEAVE PORTAL",
+    "text": "Syntax: enter <portal>\n        leave\n\nENTER allows you to step into a portal object to be\ntransported to another location.\nLEAVE attempts to exit from an indoor location."
+  },
+  {
+    "level": 0,
+    "keywords": "TIME",
+    "text": "Syntax: time\n\nShows the current in-game time and date."
+  },
+  {
+    "level": 0,
+    "keywords": "WEATHER",
+    "text": "Syntax: weather\n\nShows the current weather conditions in your area.\nYou must be outdoors to see the weather."
+  }
+]

@@ -1,0 +1,25 @@
+# =============================================================================
+# SMAUG 2.0 — .dockerignore
+# =============================================================================
+
+node_modules
+dist
+.git
+.gitignore
+*.md
+!README.md
+legacy
+tests
+coverage
+.env
+.env.*
+!.env.example
+docker-compose*.yml
+Dockerfile
+.dockerignore
+.eslintrc.cjs
+.prettierrc
+.prettierignore
+.vscode
+.idea
+*.log

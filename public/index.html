@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMAUG 2.0 — Browser MUD Client</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: 'Courier New', Courier, monospace; background: #0c0c0c; color: #c0c0c0; display: flex; flex-direction: column; }
+
+    /* Header */
+    #header { background: #1a1a2e; padding: 8px 16px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #333; flex-shrink: 0; }
+    #header h1 { font-size: 16px; color: #e94560; }
+    #header .status { font-size: 12px; color: #888; margin-left: auto; }
+    #header .status.connected { color: #4caf50; }
+
+    /* Output area */
+    #output-wrapper { flex: 1; overflow: hidden; position: relative; }
+    #output { height: 100%; overflow-y: auto; padding: 8px 12px; font-size: 14px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; }
+    #output .line { min-height: 1em; }
+
+    /* Input area */
+    #input-bar { display: flex; border-top: 1px solid #333; background: #111; flex-shrink: 0; }
+    #input-bar .prompt { padding: 8px; color: #e94560; font-size: 14px; }
+    #cmd-input { flex: 1; background: #111; border: none; color: #e0e0e0; font-family: inherit; font-size: 14px; padding: 8px; outline: none; }
+    #cmd-input::placeholder { color: #555; }
+    #send-btn { background: #0f3460; color: #e0e0e0; border: none; padding: 8px 16px; cursor: pointer; font-family: inherit; font-size: 14px; }
+    #send-btn:hover { background: #64b5f6; color: #0c0c0c; }
+
+    /* ANSI color classes */
+    .ansi-black   { color: #000; }     .ansi-red     { color: #aa0000; }
+    .ansi-green   { color: #00aa00; }   .ansi-yellow  { color: #aa5500; }
+    .ansi-blue    { color: #0000aa; }   .ansi-magenta { color: #aa00aa; }
+    .ansi-cyan    { color: #00aaaa; }   .ansi-white   { color: #aaaaaa; }
+    .ansi-bright-black   { color: #555555; } .ansi-bright-red     { color: #ff5555; }
+    .ansi-bright-green   { color: #55ff55; } .ansi-bright-yellow  { color: #ffff55; }
+    .ansi-bright-blue    { color: #5555ff; } .ansi-bright-magenta { color: #ff55ff; }
+    .ansi-bright-cyan    { color: #55ffff; } .ansi-bright-white   { color: #ffffff; }
+    .ansi-bold    { font-weight: bold; }
+    .ansi-blink   { animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .ansi-bg-black   { background: #000; }     .ansi-bg-red     { background: #aa0000; }
+    .ansi-bg-green   { background: #00aa00; }   .ansi-bg-yellow  { background: #aa5500; }
+    .ansi-bg-blue    { background: #0000aa; }   .ansi-bg-magenta { background: #aa00aa; }
+    .ansi-bg-cyan    { background: #00aaaa; }   .ansi-bg-white   { background: #aaaaaa; }
+
+    /* GMCP panel (hidden by default) */
+    #gmcp-panel { display: none; position: absolute; top: 0; right: 0; width: 240px; background: rgba(26,26,46,0.95); border-left: 1px solid #333; padding: 12px; font-size: 12px; height: 100%; overflow-y: auto; }
+    #gmcp-panel h3 { color: #e94560; font-size: 13px; margin-bottom: 8px; }
+    #gmcp-panel .gmcp-row { display: flex; justify-content: space-between; padding: 2px 0; }
+    #gmcp-panel .gmcp-label { color: #888; }
+    #gmcp-panel .gmcp-value { color: #64b5f6; }
+    .bar { height: 8px; background: #333; border-radius: 4px; margin-top: 2px; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+    .bar-hp .bar-fill { background: #e94560; }
+    .bar-mana .bar-fill { background: #64b5f6; }
+    .bar-move .bar-fill { background: #4caf50; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>SMAUG 2.0</h1>
+    <span id="conn-status" class="status">Disconnected</span>
+  </div>
+
+  <div id="output-wrapper">
+    <div id="output"></div>
+    <div id="gmcp-panel">
+      <h3>Character</h3>
+      <div class="gmcp-row"><span class="gmcp-label">Name</span><span class="gmcp-value" id="gmcp-name">—</span></div>
+      <div class="gmcp-row"><span class="gmcp-label">Level</span><span class="gmcp-value" id="gmcp-level">—</span></div>
+      <div class="gmcp-row"><span class="gmcp-label">HP</span><span class="gmcp-value" id="gmcp-hp">—</span></div>
+      <div class="bar bar-hp"><div class="bar-fill" id="gmcp-hp-bar" style="width:100%"></div></div>
+      <div class="gmcp-row"><span class="gmcp-label">Mana</span><span class="gmcp-value" id="gmcp-mana">—</span></div>
+      <div class="bar bar-mana"><div class="bar-fill" id="gmcp-mana-bar" style="width:100%"></div></div>
+      <div class="gmcp-row"><span class="gmcp-label">Move</span><span class="gmcp-value" id="gmcp-move">—</span></div>
+      <div class="bar bar-move"><div class="bar-fill" id="gmcp-move-bar" style="width:100%"></div></div>
+    </div>
+  </div>
+
+  <div id="input-bar">
+    <span class="prompt">&gt;</span>
+    <input id="cmd-input" placeholder="Enter command..." autofocus autocomplete="off" />
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script src="/js/client.js"></script>
+</body>
+</html>

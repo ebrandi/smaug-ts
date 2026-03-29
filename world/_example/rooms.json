@@ -1,0 +1,50 @@
+[
+  {
+    "vnum": 100,
+    "name": "Town Square",
+    "description": "You are standing in the center of a bustling town square. Cobblestone paths lead in several directions, and a large fountain bubbles cheerfully in the center.",
+    "sectorType": 0,
+    "roomFlags": 0,
+    "exits": [
+      { "direction": 0, "toRoom": 101, "keyword": "", "flags": 0, "key": -1, "description": "A cobblestone road leads north." },
+      { "direction": 1, "toRoom": 102, "keyword": "", "flags": 0, "key": -1, "description": "A narrow lane leads east to the market." }
+    ],
+    "extraDescriptions": [
+      { "keywords": "fountain", "description": "The fountain is carved from white marble, water cascading gently into a wide basin." }
+    ],
+    "light": 0,
+    "teleportVnum": -1,
+    "teleportDelay": 0,
+    "tunnel": 0
+  },
+  {
+    "vnum": 101,
+    "name": "North Road",
+    "description": "A wide cobblestone road stretches northward from the town square. Tall oak trees line both sides, providing shade.",
+    "sectorType": 0,
+    "roomFlags": 0,
+    "exits": [
+      { "direction": 2, "toRoom": 100, "keyword": "", "flags": 0, "key": -1, "description": "The town square lies to the south." }
+    ],
+    "extraDescriptions": [],
+    "light": 0,
+    "teleportVnum": -1,
+    "teleportDelay": 0,
+    "tunnel": 0
+  },
+  {
+    "vnum": 102,
+    "name": "Market Street",
+    "description": "A busy market street lined with vendor stalls and colorful awnings. The smell of fresh bread and exotic spices fills the air.",
+    "sectorType": 0,
+    "roomFlags": 0,
+    "exits": [
+      { "direction": 3, "toRoom": 100, "keyword": "", "flags": 0, "key": -1, "description": "The town square is to the west." }
+    ],
+    "extraDescriptions": [],
+    "light": 0,
+    "teleportVnum": -1,
+    "teleportDelay": 0,
+    "tunnel": 0
+  }
+]

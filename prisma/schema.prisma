@@ -1,0 +1,502 @@
+// =============================================================================
+// SMAUG 2.0 – Prisma Schema
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum Sex {
+  NEUTRAL
+  MALE
+  FEMALE
+}
+
+enum ClanType {
+  PLAIN
+  VAMPIRE
+  WARRIOR
+  DRUID
+  MAGE
+  CELTIC
+  DEMON
+  ANGEL
+  ARCHER
+  THIEF
+  CLERIC
+  PIRATE
+  ASSASSIN
+  UNDEAD
+  CHAOTIC
+  NEUTRAL_ALIGN
+  LAWFUL
+  NOKILL
+  ORDER
+  GUILD
+}
+
+enum BanType {
+  NEWBIE
+  MORTAL
+  ALL
+  LEVEL
+  WARN
+}
+
+enum BoardVoteType {
+  NONE
+  OPEN
+  CLOSED
+  BALLOT
+}
+
+enum AuthState {
+  CREATED
+  NAME_CHOSEN
+  PASSWORD_SET
+  WAITING_APPROVAL
+  AUTHORIZED
+}
+
+// ---------------------------------------------------------------------------
+// Models
+// ---------------------------------------------------------------------------
+
+/// Central player character record – persisted between sessions.
+model PlayerCharacter {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  displayName   String
+  passwordHash  String
+  email         String?
+  totpSecret    String?
+
+  // Core
+  level     Int
+  sex       Sex       @default(NEUTRAL)
+  race      String    @default("human")
+  class     String    @default("warrior")  @map("char_class")
+  trust     Int       @default(0)
+
+  // Vitals
+  hit       Int       @default(20)
+  maxHit    Int       @default(20)
+  mana      Int       @default(100)
+  maxMana   Int       @default(100)
+  move      Int       @default(100)
+  maxMove   Int       @default(100)
+
+  // Stats – stored as JSON { str, int, wis, dex, con, cha, lck }
+  permStats Json      @default("{}")
+  modStats  Json      @default("{}")
+
+  // Combat
+  hitroll     Int     @default(0)
+  damroll     Int     @default(0)
+  armor       Int     @default(100)
+  alignment   Int     @default(0)
+  wimpy       Int     @default(0)
+  numAttacks  Int     @default(1)
+
+  // Saving throws
+  savingPoison  Int   @default(0)
+  savingRod     Int   @default(0)
+  savingPara    Int   @default(0)
+  savingBreath  Int   @default(0)
+  savingSpell   Int   @default(0)
+
+  // Economy
+  gold           Int  @default(0)
+  silver         Int  @default(0)
+  copper         Int  @default(0)
+  exp            Int  @default(0)
+  goldBalance    Int  @default(0)
+  silverBalance  Int  @default(0)
+  copperBalance  Int  @default(0)
+
+  // Bitvectors (stored as stringified bigints)
+  actFlags    String  @default("0")
+  affectedBy  String  @default("0")
+  immune      String  @default("0")
+  resistant   String  @default("0")
+  susceptible String  @default("0")
+
+  // Position
+  position  Int       @default(11)
+  style     Int       @default(0)
+
+  // Language
+  speaking  Int       @default(0)
+  speaks    String    @default("0")
+
+  // Physical
+  height    Int       @default(72)
+  weight    Int       @default(180)
+
+  // Identity text
+  title       String  @default("")
+  rank        String  @default("")
+  bio         String  @default("")
+  homepage    String  @default("")
+  prompt      String  @default("")
+  fightPrompt String  @default("")
+  bamfIn      String  @default("")
+  bamfOut     String  @default("")
+
+  // Affiliations
+  clanName    String?
+  councilName String?
+  deityName   String?
+  favour      Int       @default(0)
+
+  // Conditions [ drunk, full, thirst, bloodthirst ]
+  conditions  Json    @default("[]")
+
+  // PK statistics
+  pkills      Int     @default(0)
+  pdeaths     Int     @default(0)
+  mkills      Int     @default(0)
+  mdeaths     Int     @default(0)
+  illegalPk   Int     @default(0)
+
+  // Admin
+  authState   AuthState @default(CREATED)
+  wizInvis    Int       @default(0)
+  minSnoop    Int       @default(0)
+  bestowments String    @default("")
+  flags       String    @default("0")
+
+  // Editor ranges
+  rRangeLo    Int       @default(0)
+  rRangeHi    Int       @default(0)
+  mRangeLo    Int       @default(0)
+  mRangeHi    Int       @default(0)
+  oRangeLo    Int       @default(0)
+  oRangeHi    Int       @default(0)
+
+  // Quest
+  questNumber   Int     @default(0)
+  questCurrent  Int     @default(0)
+  questAccum    Int     @default(0)
+
+  // Pager
+  pagerLen    Int       @default(24)
+  pagerOn     Boolean   @default(true)
+
+  // Misc
+  stances     Json      @default("{}")
+  colors      Json      @default("{}")
+  ignored     String    @default("")
+  spouse      String?
+
+  // Room
+  lastRoom    Int       @default(0)
+
+  // Timing
+  played      Int       @default(0)
+  lastLogin   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Hell
+  releaseDate DateTime?
+  helledBy    String?
+
+  // Relations
+  affects     PlayerAffect[]
+  skills      PlayerSkill[]
+  equipment   PlayerEquipment[]
+  aliases     PlayerAlias[]
+  inventory   PlayerInventory[]
+
+  Clan        Clan?     @relation(fields: [clanName], references: [name])
+  Council     Council?  @relation(fields: [councilName], references: [name])
+  Deity       Deity?    @relation(fields: [deityName], references: [name])
+
+  @@index([level])
+  @@index([clanName])
+  @@index([lastLogin])
+}
+
+/// Active affect on a player character.
+model PlayerAffect {
+  id          String  @id @default(cuid())
+  playerName  String
+  type        Int
+  duration    Int
+  location    Int
+  modifier    Int
+  bitvector   String  @default("0")
+
+  player      PlayerCharacter @relation(fields: [playerName], references: [name], onDelete: Cascade)
+
+  @@index([playerName])
+}
+
+/// Learned skill / spell proficiency.
+model PlayerSkill {
+  id            String  @id @default(cuid())
+  playerName    String
+  skillNumber   Int
+  proficiency   Int     @default(0) // 0-100
+
+  player        PlayerCharacter @relation(fields: [playerName], references: [name], onDelete: Cascade)
+
+  @@unique([playerName, skillNumber])
+}
+
+/// Equipped item snapshot.
+model PlayerEquipment {
+  id            String  @id @default(cuid())
+  playerName    String
+  wearLocation  Int
+  objectVnum    Int
+  objectLevel   Int
+  objectValues  Json    @default("[]")
+  objectAffects Json    @default("[]")
+  extraFlags    String  @default("0")
+  timer         Int     @default(0)
+
+  player        PlayerCharacter @relation(fields: [playerName], references: [name], onDelete: Cascade)
+
+  @@index([playerName])
+}
+
+/// Inventory item snapshot (supports nesting via containedIn).
+model PlayerInventory {
+  id            String  @id @default(cuid())
+  playerName    String
+  objectVnum    Int
+  objectLevel   Int
+  objectValues  Json    @default("[]")
+  objectAffects Json    @default("[]")
+  extraFlags    String  @default("0")
+  timer         Int     @default(0)
+  containedIn   String?
+
+  player        PlayerCharacter @relation(fields: [playerName], references: [name], onDelete: Cascade)
+  container     PlayerInventory?  @relation("ContainerItems", fields: [containedIn], references: [id])
+  contents      PlayerInventory[] @relation("ContainerItems")
+
+  @@index([playerName])
+  @@index([containedIn])
+}
+
+/// Alias mapping for a player.
+model PlayerAlias {
+  id          String  @id @default(cuid())
+  playerName  String
+  alias       String
+  expansion   String
+
+  player      PlayerCharacter @relation(fields: [playerName], references: [name], onDelete: Cascade)
+
+  @@unique([playerName, alias])
+}
+
+/// Clan / Guild / Order organisation.
+model Clan {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  filename      String    @unique
+  abbrev        String    @default("")
+  motto         String    @default("")
+  description   String    @default("")
+  leader        String    @default("")
+  number1       String    @default("")
+  number2       String    @default("")
+  clanType      ClanType  @default(PLAIN)
+  members       Int       @default(0)
+  memLimit      Int       @default(0)
+  alignment     Int       @default(0)
+  classRestr    Int       @default(0)
+  board         Int       @default(0)
+  recall        Int       @default(0)
+  storeroom     Int       @default(0)
+  guard1        Int       @default(0)
+  guard2        Int       @default(0)
+  clanObjects   Json      @default("[]")
+  pkills        Json      @default("[0,0,0,0,0,0,0]")
+  pdeaths       Json      @default("[0,0,0,0,0,0,0]")
+  mkills        Int       @default(0)
+  mdeaths       Int       @default(0)
+  score         Int       @default(0)
+  favour        Int       @default(0)
+  strikes       Int       @default(0)
+  treasury      Int       @default(0)
+  clanClass     Int       @default(-1)
+  minAlign      Int       @default(-1000)
+  maxAlign      Int       @default(1000)
+  badge         String    @default("")
+  deityName     String    @default("")
+
+  playerMembers PlayerCharacter[]
+}
+
+/// Council organisation.
+model Council {
+  id            String  @id @default(cuid())
+  name          String  @unique
+  filename      String  @unique
+  description   String  @default("")
+  head          String  @default("")
+  head2         String  @default("")
+  powers        String  @default("")
+  abbrev        String  @default("")
+  members       Int     @default(0)
+  board         Int     @default(0)
+  meeting       Int     @default(0)
+  storeroom     Int     @default(0)
+
+  playerMembers PlayerCharacter[]
+}
+
+/// Deity that players can worship.
+model Deity {
+  id            String  @id @default(cuid())
+  name          String  @unique
+  filename      String  @unique
+  description   String  @default("")
+  alignment     Int     @default(0)
+  minAlign      Int     @default(-1000)
+  maxAlign      Int     @default(1000)
+  worshippers   Int     @default(0)
+  recall        Int     @default(0)
+  avatarVnum    Int     @default(0)
+  race          Int     @default(-1)
+  class         Int     @default(-1) @map("deity_class")
+  sex           Int     @default(-1)
+  element       Int     @default(0)
+  suscept       BigInt  @default(0)
+  objstat       Int     @default(0)
+  npcRace       Int     @default(-1)
+  npcFoe        Int     @default(-1)
+
+  // Favour modification values
+  flee          Int     @default(0)
+  kill          Int     @default(0)
+  killMagic     Int     @default(0)
+  sacrifice     Int     @default(0)
+  buryCorpse    Int     @default(0)
+  aidSpell      Int     @default(0)
+  aid           Int     @default(0)
+  backstab      Int     @default(0)
+  steal         Int     @default(0)
+  die           Int     @default(0)
+  dieMagic      Int     @default(0)
+
+  // Supplicate costs
+  spellAid      Int     @default(100)
+  recallCost    Int     @default(50)
+  avatarCost    Int     @default(500)
+
+  actions       Json    @default("{}")
+
+  followers     PlayerCharacter[]
+}
+
+/// Site / name ban entry.
+model Ban {
+  id          String    @id @default(cuid())
+  name        String
+  user        String    @default("")
+  note        String    @default("")
+  bannedBy    String    @default("")
+  bannedAt    DateTime  @default(now())
+  banType     BanType   @default(ALL)
+  level       Int       @default(0)
+  unbanDate   DateTime?
+  duration    Int       @default(-1)
+  prefix      Boolean   @default(false)
+  suffix      Boolean   @default(false)
+
+  @@index([name])
+  @@index([banType])
+}
+
+/// Discussion board definition.
+model Board {
+  id              String  @id @default(cuid())
+  name            String  @unique
+  filename        String  @unique
+  boardVnum       Int     @default(0)
+  minReadLevel    Int     @default(0)
+  minPostLevel    Int     @default(0)
+  minRemoveLevel  Int     @default(0)
+  maxPosts        Int     @default(50)
+  readGroup       String?
+  postGroup       String?
+  extraReaders    String  @default("")
+  extraRemovers   String  @default("")
+  otrusted        Boolean @default(false)
+
+  notes           BoardNote[]
+
+  @@index([boardVnum])
+}
+
+/// A note posted on a board.
+model BoardNote {
+  id            String        @id @default(cuid())
+  boardId       String
+  sender        String
+  toList        String        @default("all")
+  subject       String
+  text          String
+  dateStamp     DateTime      @default(now())
+  voting        BoardVoteType @default(NONE)
+  yeaVotes      Int           @default(0)
+  nayVotes      Int           @default(0)
+  abstainVotes  Int           @default(0)
+  yeaVoters     String[]      @default([])
+  nayVoters     String[]      @default([])
+  abstainVoters String[]      @default([])
+
+  board         Board         @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  @@index([boardId])
+  @@index([sender])
+}
+
+/// Player housing record.
+model PlayerHouse {
+  id          String    @id @default(cuid())
+  owner       String    @unique
+  homeVnum    Int
+  name        String    @default("")
+  description String    @default("")
+  accessories String[]  @default([])
+  apartment   Boolean   @default(false)
+}
+
+/// Persistent key-value configuration store.
+model SystemConfig {
+  key       String  @id
+  value     String  @default("")
+  category  String  @default("general")
+
+  @@index([category])
+}
+
+/// Immutable audit trail for administrative actions.
+model AuditLog {
+  id        String    @id @default(cuid())
+  actor     String
+  action    String
+  target    String?
+  details   String?
+  timestamp DateTime  @default(now())
+
+  @@index([actor])
+  @@index([timestamp])
+  @@index([action])
+}
