@@ -10,6 +10,42 @@ a browser-based play client, and a React admin dashboard.
 
 ---
 
+## AI-First Development
+
+This project was developed using an **AI-augmented workflow** where the architecture and implementation were evolved through a multi-phase, LLM-guided roadmap. The development was executed sequentially via prompts in `AI_Prompts/`, ensuring architectural consistency and comprehensive coverage of legacy SMAUG 2.0 features.
+
+The `AI_Prompts/` directory contains the **source of truth** for the development logic: a sequential execution of 68 phase files that analyze the legacy codebase, design the modern architecture, implement TypeScript modules, verify feature parity, and generate documentation. Each phase produces a markdown document that becomes the foundation for subsequent phases.
+
+**Key phases:**
+- **Phase 0**: Legacy codebase discovery and structure analysis
+- **Phase 1**: Business logic extraction from 200k+ lines of C
+- **Phase 2**: Modern TypeScript architecture design
+- **Phase 3**: TypeScript implementation of all game systems
+- **Phase 4**: Feature parity verification against legacy
+- **Phase 5**: Developer and deployment documentation
+- **Phase 6**: Production deployment automation
+
+This AI-first approach enabled systematic port of a complex game engine while preserving every gameplay mechanic, timing characteristic, and world-building capability of the original SMAUG 2.0 C codebase.
+
+---
+
+## Documentation Roadmap
+
+The core development logic and system architecture are documented in a chain of progressive markdown files. These documents are **sequential and interdependent**—each builds upon the previous phase to ensure architectural integrity and data-model consistency.
+
+| File | Purpose | Status |
+|---|---|---|
+| **`STRUCTURE.md`** | Initial scaffolding and organizational logic. Catalogues all legacy source files by subsystem, establishes the physical layout and reading order for subsequent analysis. | Generated from Phase 0 |
+| **`DATAMODEL.md`** | Definition of core entities and data relationships. Extracts all structs, enums, and bitvectors from legacy headers, creating the authoritative data model reference. | Generated from Phase 0 |
+| **`COMMANDS.md`** | Functional operations, CLI commands, and API endpoints. Documents command table structure, trust/position checks, abbreviations, and the 200+ legacy commands. | Generated from Phase 1-2 |
+| **`ANALYSIS.md`** | Critical technical review and requirement validation. Systems-level breakdown of game loop, database, magic, skills, OLC, and administration. | Generated from Phase 1-2 |
+| **`ARCHITECTURE.md`** | The final high-level system blueprint. Technology stack decisions, folder structure, component hierarchy, and 26-section implementation roadmap. | Generated from Phase 2 |
+| **`PARITY.md`** | Final validation to ensure the implementation matches the initial roadmap goals. Comprehensive gap analysis of every legacy feature against TypeScript implementation. | Generated from Phase 4 |
+
+For full technical details, see the AI_Prompts directory which contains the executable phase files that produced these documents.
+
+---
+
 ### Key Features
 
 | Category | Highlights |
