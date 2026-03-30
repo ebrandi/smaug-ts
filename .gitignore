@@ -26,6 +26,7 @@ prisma/*.db*
 .project
 .classpath
 .settings/
+.opencode/
 
 # Logs
 logs/
